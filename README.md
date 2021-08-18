@@ -9,8 +9,7 @@ Install Django using the following command: \
 pip install Django==1.11.25
 
 To run api run the following commands. The data_outfits_generated folder contains the outfits generated for different items.\
-cd ctl/ \
-
+cd ctl \
 python manage.py runserver portnumber
 
 ## Demo Video
