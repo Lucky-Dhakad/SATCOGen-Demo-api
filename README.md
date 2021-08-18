@@ -6,9 +6,11 @@ To run the api Django==1.11.25 is required as dependency. \
 Install Django using the following command: \
 pip install Django==1.11.25
 
-To run api run the following commands. The data_outfits_generated folder contains the outfits generated for different items.\
+The data_outfits_generated folder contains the outfits generated for different items.\
+Execute the following commands to run the api. \
 cd ctl \
-python manage.py runserver portnumber
+python manage.py runserver <portnumber>\
+E.g., python manage.py runserver 8888
 
 ## Demo Video
 The video is in the demo_video folder in the repo. The video gives a demonstration of the app showing how to browse through different options in anchor categories, items and outfits. \
