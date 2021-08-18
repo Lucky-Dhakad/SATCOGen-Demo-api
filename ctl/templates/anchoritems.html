@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>Stores</title>
+    <link rel="stylesheet" href="{% static 'ctl/css/style.css' %}">
+    <style>
+            table {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                margin-left: auto;
+                margin-right: auto;
+                width: 60%;
+            }
+
+
+            td, th {
+                border: 1px solid #dddddd;
+                text-align: center;
+                padding: 8px;
+            }
+
+            .zebra-stripe {
+                background-color: #dddddd;
+            }
+
+            {% comment %}tr:nth-child(even) {
+                background-color: #dddddd;
+            }{% endcomment %}
+        </style>
+    <script>
+            function init() {
+                let tr = document.getElementsByTagName("tr");
+                for (let i = 0; i < tr.length; i++) {
+                    tr[i].classList.add("visible");
+                    if (i % 2 === 1) {
+                        tr[i].classList.add("zebra-stripe");
+                    }
+                }
+            }
+        </script>
+</head>
+<body onload="init()">
+<div>
+    <div class="navbar">
+        <a href="/">Home</a>
+    </div>
+    {% block content %}
+        <h1>Anchor Items</h1>
+
+        <div>
+            <table id="cat">
+                <tr>
+                    <th>Category</th>
+                </tr>
+                <tr>
+                    <td>{{ cat }}</td>
+                </tr>
+            </table>
+        </div>
+        {% if anchor_items %}
+            <br><br>
+            <table id="anchoritemtable">
+                <tr>
+                    <th>Anchor Item</th>
+                </tr>
+                {% for item in anchor_items %}
+                    <tr>
+                        {% with 'ctl/images/'|add:item as imagePath %}
+                        <td><a href="{% url 'outfit' %}?cat={{ cat }}&item={{ item }}"><img class="item" src="{% static imagePath %}" /></a></td>
+                        {% endwith %}
+                    </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>There are no Items.</p>
+        {% endif %}
+    {% endblock %}
+</div>
+</body>
+</html>

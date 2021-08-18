@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+    <head>
+        <meta charset="UTF-8">
+        <title>Stores</title>
+        <link rel="stylesheet" href="{% static 'ctl/css/style.css' %}">
+        <style>
+            table {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            td, th {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+            }
+
+            .zebra-stripe {
+                background-color: #dddddd;
+            }
+
+            {% comment %}tr:nth-child(even) {
+                background-color: #dddddd;
+            }{% endcomment %}
+        </style>
+        <script>
+
+            function init() {
+                let tr = document.getElementsByTagName("tr");
+                for (let i = 0; i < tr.length; i++) {
+                    tr[i].classList.add("visible");
+                    if (i % 2 === 1) {
+                        tr[i].classList.add("zebra-stripe");
+                    }
+                }
+            }
+        </script>
+    </head>
+    <body onload="init()">
+        <div>
+            <div class="navbar">
+                <a href="/">Home</a>
+            </div>
+            {% block content %}
+                <h1>Anchor Categories</h1>
+                {% if categories %}
+                    <table id="cattable">
+                        <tr>
+                            <th>Category</th>
+                        </tr>
+                        {% for cat in categories %}
+                            <tr>
+                                <td><a href="{% url 'anchoritems' %}?cat={{ cat }}">{{ cat }}</a></td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                {% else %}
+                    <p>There are no Categories.</p>
+                {% endif %}
+            {% endblock %}
+        </div>
+    </body>
+</html>

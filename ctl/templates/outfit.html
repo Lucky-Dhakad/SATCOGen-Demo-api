@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>Stores</title>
+    <link rel="stylesheet" href="{% static 'ctl/css/style.css' %}">
+    <style>
+            table {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            td, th {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+            }
+
+            .zebra-stripe {
+                background-color: #dddddd;
+            }
+
+            {% comment %}tr:nth-child(even) {
+                background-color: #dddddd;
+            }{% endcomment %}
+        </style>
+</head>
+<body>
+<div>
+    <div class="navbar">
+        <a href="/">Home</a>
+    </div>
+    {% block content %}
+    <h1>Outfits</h1>
+    {% if outfits %}
+    <br><br>
+        {% for style, outfits_list in outfits.items %}
+            <table id="styletable">
+                <tr>
+                    <td><span style="font-weight:bold">Style</span>: {{ style }}</td>
+                </tr>
+                <tr>
+                    <td><span style="font-weight:bold">Anchor Category</span> : {{ cat }}</td>
+                </tr>
+            </table>
+            <br>
+    <table>
+        <tr>
+        {% for targetcats in outfits_list.template %}
+            <th style="text-align:center">{{ targetcats }}</th>
+        {% endfor %}
+        </tr>
+        {% for o in outfits_list.outfits %}
+        <tr>
+        {% for p in o.outfit %}
+            {% with 'ctl/images/'|add:p as imagePath %}
+            <td style="text-align:center"><img class="item" src="{% static imagePath %}" width="150" height="200"/></td>
+            {% endwith %}
+        {% endfor %}
+
+        </tr>
+        {% endfor %}
+
+    </table>
+    <br><br>
+    {% endfor %}
+{% endif %}
+    {% endblock %}
+</div>
+</body>
+</html>
